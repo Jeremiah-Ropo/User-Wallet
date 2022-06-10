@@ -1,28 +1,17 @@
 const mongoose = require('mongoose');
+const ip = require('ip');
 
-const userSchema = mongoose.Schema({
-    name:{
-        type:String,
-        required:true
+const userSchema = new mongoose.Schema({
+    token: {
+        type : String,
+        required : true
     },
-    username:{
-        type:String,
-        required:true
-    },
-    email : {
-        type: String,
-        required:true
-    }, 
-    
-    password:{
-        type:String,
-        required:true
-    },
-    token:{
-        type: String
+    ipAddress : {
+        type : String,
+        default: ip.address()
     }
 }, {timestamp:true})
 
-const User = mongoose.model('user', userSchema)
+const User = new mongoose.model('user', userSchema)
 
 module.exports = User
